@@ -39,38 +39,8 @@ resource "helm_release" "mongodb" {
         nodeSelector:
           nodegroup: "mongodb"
         global:
-          storageClass: "gp2"
+          storageClass: "gp3"
          
         EOF
     ]
 }
-# module "mongodb" {
-#   source  = "squareops/mongodb/kubernetes"
-#   version = "2.1.1"
-#   namespace = "db"
-#   create_namespace = true
-#   mongodb_backup_config = {
-#     architecture                     = "replicaset"
-#     storage_class_name               = "gp2" 
-#     values_yaml = [
-#         <<-EOF
-#     primary:
-#     nodeSelector:
-#         eks.amazonaws.com/nodegroup: "mongodb"
-
-#     secondary:
-#     nodeSelector:
-#         eks.amazonaws.com/nodegroup: "mongodb"
-
-#     arbiter:
-#     nodeSelector:
-#         eks.amazonaws.com/nodegroup: "mongodb"
-#     EOF
-#     ]
-#   }
-#   mongodb_custom_credentials_enabled = true
-#   mongodb_custom_credentials_config = {
-#     root_user                = "root"
-#     root_password            = random_password.db_password.result
-#   }
-# }
