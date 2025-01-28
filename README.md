@@ -23,7 +23,7 @@ This repository manages the cloud infrastructure for our platform, built using *
 │   ├── providers.tf
 │   ├── variables.tf
 │   └── vpc.tf
-└── terraform.tfstate
+
 ```
 ---
 
