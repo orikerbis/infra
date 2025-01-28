@@ -86,3 +86,21 @@ The repository supports multiple environments (`dev`, `test`, `prod`), each with
   - `backend.tf`: Configures the remote state backend for storing Terraform state.
   - `main.tf`: Specifies environment-specific variables and invokes the platform module.
 
+## About the Project
+
+This repository is **one of three repositories** that together form the complete platform:
+
+1. **Infrastructure Repository (This Repository)**:
+   - Manages cloud infrastructure using Terraform.
+   - Provisions resources such as EKS, VPC, AWS Load Balancer Controller, Nginx, and more.
+
+2. **GitOps Repository**:
+   - Manages Kubernetes deployments using a GitOps approach with **ArgoCD**.
+   - Tracks application Helm charts and Kubernetes manifests.
+
+3. **Application Repository**:
+   - Contains the application codebase, Dockerfiles, and CI/CD pipelines for building and deploying the app.
+
+These repositories are designed to work together, providing a modular and scalable platform.
+
+---
