@@ -3,6 +3,7 @@
 This repository manages the cloud infrastructure for our platform, built using **Terraform**. It provisions resources on AWS, including an **EKS cluster**, **VPC**, and additional services such as **Karpenter**, **ArgoCD**, and **Nginx Ingress Controller**. The repository is designed to support multiple environments (e.g., `dev`, `test`, `prod`) and includes modular and reusable Terraform configurations.
 
 ---
+![Diagram](https://github.com/user-attachments/assets/c36781fc-92f9-4800-af15-05b81cc5400b) 
 
 ## Directory Structure
 ``` plaintext
