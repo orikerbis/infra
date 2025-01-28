@@ -63,7 +63,25 @@ The **Virtual Private Cloud (VPC)** is a custom networking environment where all
 - Configured as an **internal load balancer**.
 - Routes requests from the AWS ALB to specific Kubernetes services based on ingress rules.
 
-### 5. **Helm Chart Deployments**
+### 5. **Domain Name and HTTPS Setup**
+
+- **Domain Name**:
+  - The platform is accessible via a custom domain name (e.g., `example.com`).
+
+- **SSL Certificate**:
+  - An **AWS Certificate Manager (ACM)** certificate is provisioned automatically for the domain name.
+  - Enables secure HTTPS connections for the platform.
+
+- **ACM Module**:
+  - A reusable ACM module is implemented in the `platform/` directory to automate the creation of SSL certificates for the domain.
+  - Automatically validates the domain using DNS validation through Route 53.
+
+- **ALB Alias Record**:
+  - An **Alias Record** is created in **Amazon Route 53** to map the domain name to the Application Load Balancer (ALB).
+  - This ensures that all traffic to the domain is routed to the ALB, which then forwards it to the internal Nginx Ingress Controller for routing to Kubernetes services.
+
+
+### 6. **Helm Chart Deployments**
 - Uses Helm to deploy:
   - **ArgoCD**: For GitOps-based continuous delivery.
   - **Nginx Ingress Controller**: For internal traffic routing.
@@ -71,7 +89,7 @@ The **Virtual Private Cloud (VPC)** is a custom networking environment where all
   - **prometheus-stack**: For monitoring the infrastracture
   - **MongoDB**: For storing the data. I've used a EBS-CSI driver to store all the data in an external block storage for data protection.
 
-### 6. **MongoDB and Secret Management**
+### 7. **MongoDB and Secret Management**
 - **MongoDB StatefulSet** deployed in the EKS cluster.
 - A random password for MongoDB is generated using Terraform and stored securely in **AWS Secrets Manager**.
 - **External Secrets** integration allows Kubernetes to inject the MongoDB password directly into the application at runtime.
