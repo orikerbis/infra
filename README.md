@@ -28,19 +28,21 @@ This repository manages the cloud infrastructure for our platform, built using *
 ---
 
 ## Key Features
+
 ### 1. **VPC Design**
-    The **Virtual Private Cloud (VPC)** is a custom networking environment where all AWS resources, including the EKS cluster, reside. The VPC is designed to ensure security, scalability, and high availability:
 
-    - **Subnets**:
-    - **Private Subnets**: The EKS cluster is deployed entirely within private subnets, ensuring that the cluster nodes and workloads are not directly accessible from the internet.
-    - **Public Subnets**: Used for internet-facing resources such as the ALB (Application Load Balancer) provisioned by the AWS Load Balancer Controller.
+The **Virtual Private Cloud (VPC)** is a custom networking environment where all AWS resources, including the EKS cluster, reside. The VPC is designed to ensure security, scalability, and high availability:
 
-    - **Internet Gateway**:
-    - Attached to the VPC to enable resources in public subnets (e.g., ALB) to access the internet.
+- **Subnets**:
+- **Private Subnets**: The EKS cluster is deployed entirely within private subnets, ensuring that the cluster nodes and workloads are not directly accessible from the internet.
+- **Public Subnets**: Used for internet-facing resources such as the ALB (Application Load Balancer) provisioned by the AWS Load Balancer Controller.
 
-    - **NAT Gateways**:
-    - Used to allow resources in private subnets (e.g., EKS nodes) to access the internet securely (e.g., for pulling container images or updating software) without exposing them to incoming traffic.
-    - A NAT Gateway is deployed in each availability zone for redundancy.
+- **Internet Gateway**:
+- Attached to the VPC to enable resources in public subnets (e.g., ALB) to access the internet.
+
+- **NAT Gateways**:
+- Used to allow resources in private subnets (e.g., EKS nodes) to access the internet securely (e.g., for pulling container images or updating software) without exposing them to incoming traffic.
+- A NAT Gateway is deployed in each availability zone for redundancy.
 
 - **Routing**:
   - Public subnets route traffic to the internet via the Internet Gateway.
