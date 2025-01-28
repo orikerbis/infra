@@ -39,9 +39,9 @@ module "eks" {
     mongodb = {
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.medium"]
-      min_size       = 2
-      max_size       = 4
-      desired_size   = 2
+      min_size       = 1
+      max_size       = 2
+      desired_size   = 1
       labels = {
       "nodegroup" = "mongodb"
       }
@@ -53,10 +53,16 @@ module "eks" {
   }
 }
 
+resource "aws_eks_addon" "example" {
+  cluster_name = var.cluster_name
+  addon_name   = "aws-ebs-csi-driver"
+  depends_on = [ module.eks ]
+}
+
+
 module "eks_blueprints_addons" {
   source  = "aws-ia/eks-blueprints-addons/aws"
   version = "1.19.0" 
-
   cluster_name      = module.eks.cluster_name
   cluster_endpoint  = module.eks.cluster_endpoint
   cluster_version   = module.eks.cluster_version
@@ -76,7 +82,6 @@ module "eks_blueprints_addons" {
       }
     ] 
   }
-
 }
 
 module "karpenter" {
@@ -207,6 +212,8 @@ resource "helm_release" "prometheus" {
   version   = "67.9.0"
   depends_on = [ helm_release.karpenter, kubectl_manifest.karpenter_node_class, kubectl_manifest.karpenter_node_pool, aws_iam_service_linked_role.spot ] 
 }
+
+
 
 
 

@@ -39,7 +39,7 @@ resource "helm_release" "mongodb" {
         nodeSelector:
           nodegroup: "mongodb"
         global:
-          storageClass: "gp3"
+          storageClass: "gp2"
          
         EOF
     ]
