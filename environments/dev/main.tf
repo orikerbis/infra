@@ -6,5 +6,5 @@ module "platform" {
   cluster_name   = "my-eks"
   vpc_cidr       = "10.0.0.0/16"
   aws_region     = "us-east-2"
-  secret_name    = "mongo"
+  secret_name    = "MongoDB-Credentials"
 }

@@ -104,6 +104,7 @@ The repository supports multiple environments (`dev`, `test`, `prod`), each with
   - `backend.tf`: Configures the remote state backend for storing Terraform state.
   - `main.tf`: Specifies environment-specific variables and invokes the platform module.
 
+
 ## About the Project
 
 This repository is **one of three repositories** that together form the complete platform:
